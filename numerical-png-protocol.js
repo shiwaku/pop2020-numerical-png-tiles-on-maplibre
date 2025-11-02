@@ -52,8 +52,8 @@ const buildPngArrayBuffer = (url) =>
   });
 
 // 両API対応版 addProtocol
-maplibregl.addProtocol("shinsui", (params, callback) => {
-  const url = params.url.replace("shinsui://", "");
+maplibregl.addProtocol("num-png", (params, callback) => {
+  const url = params.url.replace("num-png://", "");
 
   // 旧API: (params, callback)
   if (typeof callback === "function") {
