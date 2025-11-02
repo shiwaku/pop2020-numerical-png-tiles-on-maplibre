@@ -52,8 +52,8 @@ const buildPngArrayBuffer = (url) =>
   });
 
 // 両API対応版 addProtocol
-maplibregl.addProtocol("num-png", (params, callback) => {
-  const url = params.url.replace("num-png://", "");
+maplibregl.addProtocol("numpng", (params, callback) => {
+  const url = params.url.replace("numpng://", "");
 
   // 旧API: (params, callback)
   if (typeof callback === "function") {

@@ -38,6 +38,12 @@
   <body>
     <div id="map"></div>
     <script type="module">
+      /*
+      // maplibregl.addProtocol("numpng", makeNumPngProtocol());
+      maplibregl.addProtocol("numpng", makeNumPngProtocol("numpng", 0.001));
+      import { makeNumPngProtocol } from "./numPngProtocol.js";
+      */
+
       const protocol = new pmtiles.Protocol();
       maplibregl.addProtocol("pmtiles", protocol.tile);
 
@@ -87,12 +93,36 @@
         })
       );
 
+      /*
+      // 3Dコントロール
+      map.addControl(
+        new maplibregl.TerrainControl({
+          source: "numpng-3d",
+          exaggeration: 1, // 標高を強調する倍率
+        })
+      );
+      */
+
       // マップをロード
       map.on("load", () => {
-        map.addSource("numerical-png-tiles", {
+        /*
+        map.addSource("numpng-3d", {
+          type: "raster-dem",
+          tiles: [
+            "numpng://xs489works.xsrv.jp/raster-tiles/100m_mesh_pop2020/{z}/{x}/{y}.png",
+          ],
+          attribution:
+            '<a href="https://gtfs-gis.jp/teikyo/" target="_blank">令和2年簡易100mメッシュ人口データ(地域・交通データ研究所)</a>',
+          tileSize: 256,
+        });
+
+        map.setTerrain({ source: "numpng-3d", exaggeration: 1 });
+        */
+
+        map.addSource("numpng", {
           type: "raster",
           tiles: [
-            "num-png://https://xs489works.xsrv.jp/raster-tiles/100m_mesh_pop2020/{z}/{x}/{y}.png",
+            "numpng://https://xs489works.xsrv.jp/raster-tiles/100m_mesh_pop2020/{z}/{x}/{y}.png",
           ],
           attribution:
             '<a href="https://gtfs-gis.jp/teikyo/" target="_blank">令和2年簡易100mメッシュ人口データ(地域・交通データ研究所)</a>',
@@ -100,9 +130,9 @@
         });
 
         map.addLayer({
-          id: "shinsui-layer",
+          id: "numpng-layer",
           type: "raster",
-          source: "numerical-png-tiles",
+          source: "numpng",
         });
 
         // Skyレイヤ
